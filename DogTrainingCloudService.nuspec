@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>DevOpsGuys.DogTrainingCloudService</id>
+    <version>1.0.0.1</version>
+    <title>DogTrainingCloudService</title>
+    <authors>Andrzej Jakuszyk</authors>
+    <owners>DevOpsGuys</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Sample project for DOG training using Azure Cloud Service</description>
+  </metadata>
+  <files>
+    <file src="DogTrainingCloudService\bin\Release\app.publish\*.cspkg" target=""/>
+    <file src="DogTrainingCloudService\bin\Release\app.publish\*.cscfg" target=""/>
+  </files>
+</package>
