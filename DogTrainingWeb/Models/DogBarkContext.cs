@@ -6,8 +6,6 @@ namespace DogTrainingWeb.Models
 {
     public class DogBarkContext : DbContext
     {
-        public static DogBarkContext Instance { get; } = new DogBarkContext();
-
         public DbSet<DogBarkModel> Barks { get; set; }
 
         public IEnumerable<DogBarkModel> GetAll()
