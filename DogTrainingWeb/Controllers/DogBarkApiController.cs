@@ -6,7 +6,7 @@ namespace DogTrainingWeb.Controllers
 {
     public class DogBarkApiController : ApiController
     {
-        private readonly DogBarkContext DbContext = new DogBarkContext();
+        private static readonly DogBarkContext _DbContext = new DogBarkContext();
 
         /// <summary>
         /// Gets all barks.
@@ -14,7 +14,7 @@ namespace DogTrainingWeb.Controllers
         [HttpGet]
         public IEnumerable<DogBarkModel> GetAll()
         {
-            return DbContext.GetAll();
+            return _DbContext.GetAll();
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace DogTrainingWeb.Controllers
         [HttpGet]
         public DogBarkModel GetLatest()
         {
-            return DbContext.GetLatest();
+            return _DbContext.GetLatest();
         }
     }
 }

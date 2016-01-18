@@ -7,14 +7,14 @@ namespace DogTrainingWeb.Controllers
 {
     public class DogBarkController : Controller
     {
-        private readonly DogBarkContext DbContext = new DogBarkContext();
+        private static readonly DogBarkContext _DbContext = new DogBarkContext();
 
         [HttpGet]
         public ActionResult Index()
         {
             ViewBag.DogTrainingWebVersion = ConfigurationManager.AppSettings["DogTrainingWebVersion"];
 
-            var allBarks = DbContext.GetAll().Select(bark => new DogBarkViewModel(bark));
+            var allBarks = _DbContext.GetAll().Select(bark => new DogBarkViewModel(bark));
             return View(allBarks);
         }
 
@@ -22,7 +22,7 @@ namespace DogTrainingWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(DogBarkViewModel model)
         {
-            DbContext.Create(model);
+            _DbContext.Create(model);
             return RedirectToAction("Index");
         }
     }
