@@ -4,6 +4,8 @@ namespace DogTrainingWeb.Models
 {
     public class DogBarkViewModel
     {
+        public DogBarkViewModel() {}
+
         public DogBarkViewModel(DogBarkModel model)
         {
             Bark = model.Bark;
