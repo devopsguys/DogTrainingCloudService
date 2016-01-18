@@ -1,5 +1,6 @@
 ﻿using DogTrainingWeb.Models;
 using System.Configuration;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace DogTrainingWeb.Controllers
@@ -10,7 +11,9 @@ namespace DogTrainingWeb.Controllers
         public ActionResult Index()
         {
             ViewBag.DogTrainingWebVersion = ConfigurationManager.AppSettings["DogTrainingWebVersion"];
-            return View(DogBarkContext.Instance.GetAll());
+
+            var allBarks = DogBarkContext.Instance.GetAll().Select(bark => new DogBarkViewModel(bark));
+            return View(allBarks);
         }
 
         [HttpPost]

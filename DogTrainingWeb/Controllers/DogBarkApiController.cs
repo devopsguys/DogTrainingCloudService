@@ -6,31 +6,22 @@ namespace DogTrainingWeb.Controllers
 {
     public class DogBarkApiController : ApiController
     {
-        // GET: api/Api
-        public IEnumerable<DogBarkModel> Get()
+        /// <summary>
+        /// Gets all barks.
+        /// </summary>
+        [HttpGet]
+        public IEnumerable<DogBarkModel> GetAll()
         {
-            return DogBarkContext.Instance.GetAllApi();
+            return DogBarkContext.Instance.GetAll();
         }
 
-        // GET: api/Api/5
-        public string Get(int id)
+        /// <summary>
+        /// Gets latest bark.
+        /// </summary>
+        [HttpGet]
+        public DogBarkModel GetLatest()
         {
-            return "value";
-        }
-
-        // POST: api/Api
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Api/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Api/5
-        public void Delete(int id)
-        {
+            return DogBarkContext.Instance.GetLatest();
         }
     }
 }

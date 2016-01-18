@@ -4,6 +4,11 @@ namespace DogTrainingWeb.Models
 {
     public class DogBarkViewModel
     {
+        public DogBarkViewModel(DogBarkModel model)
+        {
+            Bark = model.Bark;
+        }
+
         [StringLength(80), Required]
         public string Bark { get; set; }
 

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Linq;
 
 namespace DogTrainingWeb.Models
@@ -11,14 +10,17 @@ namespace DogTrainingWeb.Models
 
         public DbSet<DogBarkModel> Barks { get; set; }
 
-        public IEnumerable<DogBarkViewModel> GetAll()
-        {
-            return Barks.Select(bark => new DogBarkViewModel {Bark = bark.Bark}).ToList();
-        }
-
-        public IEnumerable<DogBarkModel> GetAllApi()
+        public IEnumerable<DogBarkModel> GetAll()
         {
             return Barks.ToList();
+        }
+
+        public DogBarkModel GetLatest()
+        {
+            if (Barks.Count() == 0) return null;
+
+            int maxId = Barks.Max(x => x.Id);
+            return Barks.First(x => x.Id == maxId);
         }
 
         public void Create(DogBarkViewModel viewModel)
