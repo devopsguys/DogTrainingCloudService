@@ -491,5 +491,10 @@
             Gets latest bark.
             </summary>
         </member>
+        <member name="M:DogTrainingWeb.Controllers.DogBarkApiController.Post(DogTrainingWeb.Models.DogBarkViewModel)">
+            <summary>
+            Post new bark.
+            </summary>
+        </member>
     </members>
 </doc>

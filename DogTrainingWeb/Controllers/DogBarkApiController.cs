@@ -25,5 +25,13 @@ namespace DogTrainingWeb.Controllers
         {
             return _DbContext.GetLatest();
         }
+
+        /// <summary>
+        /// Post new bark.
+        /// </summary>
+        public void Post([FromBody]DogBarkViewModel value)
+        {
+            _DbContext.Create(value);
+        }
     }
 }
