@@ -13,8 +13,10 @@ namespace DogTrainingWeb.Tests.Integration
     public class DogTrainingWebTests
     {
         public const string GetLatestBarkApiPath = "api/DogBarkApi/GetLatest";
+        public const string PostBarkApiPath = "api/DogBarkApi/Post";
 
         private readonly string BarkCloudServiceUrl = ConfigurationManager.AppSettings["BarkCloudServiceUrl"];
+        private readonly string DogTrainingSecret = ConfigurationManager.AppSettings["DogTrainingSecret"];
 
         [Test]
         public void MainPageReturnsHttpOK()
@@ -27,8 +29,26 @@ namespace DogTrainingWeb.Tests.Integration
         [Test]
         public void ApiReturnsLatestBark()
         {
-            var latestBark = CallApiGet<DogBarkModel>(GetLatestBarkApiPath).GetAwaiter().GetResult();
+            var latestBark = CallApiGet<DogBarkModel>(GetLatestBarkApiPath).Result;
+            if (latestBark == null)
+            {
+                PostTestBark().Wait();
+                latestBark = CallApiGet<DogBarkModel>(GetLatestBarkApiPath).Result;
+            }
             Assert.IsNotNull(latestBark);
+        }
+
+        private async Task PostTestBark()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BarkCloudServiceUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var bark = new DogBarkViewModel { Bark = "Integration Test Bark", Secret = DogTrainingSecret };
+                var response = await client.PostAsJsonAsync(PostBarkApiPath, bark);
+            }
         }
 
         private async Task<T> CallApiGet<T>(string apiPath)
